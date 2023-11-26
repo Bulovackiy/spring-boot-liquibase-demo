@@ -1,0 +1,82 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-lesson1.yaml
+  - changeSet:
+      id: 1
+      author: bulavka
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(512)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: firstname
+                  type: varchar(50)
+              - column:
+                  name: lastname
+                  type: varchar(50)
+              - column:
+                  name: email
+                  type: varchar(50)
+
+  - changeSet:
+      id: 2
+      author: bulavka
+      comment: "Create users"
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: admin
+              - column:
+                  name: password
+                  value: admin
+              - column:
+                  name: firstname
+                  value: admin first name
+              - column:
+                  name: lastname
+                  value: admin last name
+              - column:
+                  name: email
+                  value: admin@mail.com
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: guest
+              - column:
+                  name: password
+                  value: guest
+              - column:
+                  name: firstname
+                  value: guest first name
+              - column:
+                  name: lastname
+                  value: guest last name
+              - column:
+                  name: email
+                  value: guest@mail.com
+      rollback:
+        - delete:
+            tableName: users
+            where: username in ('admin', 'guest')

@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: liquibase-demo
+      MYSQL_USER: bulavka
+      MYSQL_PASSWORD: 12345678
+      MYSQL_ROOT_PASSWORD: qwerty123456
+    ports:
+      - "3306:3306"
